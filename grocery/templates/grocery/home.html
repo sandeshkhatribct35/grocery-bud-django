@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grocery Bud</title>
+    <style>
+        body { background:#eee; font-family: Arial; }
+        .box { width:400px; margin:50px auto; background:#fff; padding:20px; }
+        li { display:flex; justify-content:space-between; margin:6px 0; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>🛒 Grocery Bud</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="item" placeholder="Add grocery" required>
+        <button>Add</button>
+    </form>
+
+    <ul>
+        {% for g in groceries %}
+        <li>
+            {{ g.name }}
+            <a href="/delete/{{ g.id }}/">❌</a>
+        </li>
+        {% empty %}
+        <p>No items yet</p>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
